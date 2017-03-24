@@ -31,7 +31,7 @@ var options = {
 
 // Connect to mongoDB //
 
-var TMSB_db = 'mongodb://mdb0.trackmanbaseball.com:27000/TMSB'; //connection string
+var TMSB_db =  //connection string
 mongoose.connect(TMSB_db, function(err){
   if (err) throw err;
   console.log("Connection" + " to "+ TMSB_db + " Sucessful!")

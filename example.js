@@ -4,14 +4,14 @@ var Game = require('./models/game.js');
 var Play = require('./models/play.js');
 var converter = require('json-2-csv');
 var fs = require('fs');
-var t = require('./helpers/formatJSON.js')
+var CSV = require('./helpers/formatJSON.js')
 
 // Callback funtion to write data to a CSV file
 
-var json2csvCallback = function (err, csv) {
+var json2csvCallback = function (err,csv) {
     if (err) throw err;
 
-    fs.writeFile('test.csv', csv, function(err){
+    fs.writeFile('filename', csv, function(err){
       if (err) throw err;
       console.log('It\'s saved!');
     });
@@ -255,13 +255,13 @@ Play.aggregate(
 
   ]
 	// Created with 3T MongoChef, the GUI for MongoDB - https://3t.io/mongochef
+  ,function(err,doc) {
+    if(err) {return handleError(err);}
+    else{
+      //console.log(doc[1]);
+      //converter.json2csv(doc, json2csvCallback,options);
+      CSV(doc,function(doc){converter.json2csv(doc, json2csvCallback,options)});
 
-,function(err,doc) {
-if(err) {return handleError(err);}
-else{
-  //console.log(doc[1]);
-  //converter.json2csv(doc, json2csvCallback,options);
-  t(doc,function(x){converter.json2csv(x, json2csvCallback,options)});
-
+    }
   }
-});
+);

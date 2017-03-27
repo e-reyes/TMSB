@@ -68,14 +68,14 @@ var JSON_transformation = function (doc,Callback){
   var playsArray = [];
 
   for(i=0;i<doc.length;i++){
-  if (doc[i].PlayResult >= 0){ doc[i].PlayResult = 'Out'}
-  if (doc[i].PlayResult == null){ doc[i].PlayResult = ''}
-  if (doc[i].KorBB == 'OutonPitch'){ doc[i].KorBB = 'Strikeout'}
-  if (doc[i].KorBB == null){ doc[i].KorBB = ''}
-  if (doc[i].HitType == null){ doc[i].HitType = ''}
-  if (doc[i].KorBB == null){ doc[i].KorBB = ''}
-  if (doc[i].OutsonPlay == null){ doc[i].OutsonPlay = 0}
-  if (doc[i].RunsScore == null){ doc[i].RunsScore = 0}
+    if (doc[i].PlayResult >= 0){ doc[i].PlayResult = 'Out'}
+    if (doc[i].PlayResult == null){ doc[i].PlayResult = ''}
+    if (doc[i].KorBB == 'OutonPitch'){ doc[i].KorBB = 'Strikeout'}
+    if (doc[i].KorBB == null){ doc[i].KorBB = ''}
+    if (doc[i].HitType == null){ doc[i].HitType = ''}
+    if (doc[i].KorBB == null){ doc[i].KorBB = ''}
+    if (doc[i].OutsonPlay == null){ doc[i].OutsonPlay = 0}
+    if (doc[i].RunsScore == null){ doc[i].RunsScore = 0}
 
 
   var t_JSON ={
@@ -151,6 +151,7 @@ var JSON_transformation = function (doc,Callback){
   Callback(playsArray);
 };
 
+// TEST JSON Transformation//
 
 //JSON_transformation(testJSON,function(t){console.log(t)});
 

@@ -5,11 +5,24 @@ var Play = require('./models/play.js');
 var converter = require('json-2-csv');
 var fs = require('fs');
 var CSV = require('./helpers/formatJSON.js')
+var dropbox = require('dropbox');
 
+var AccessToken ='LF-3mQtGe3AAAAAAAAAAD8umjtxb8qjv4N64h3_sW3ZuzliimBX49rQAWUS9wztp';
+ var p = '/NCAA reports/'
+var dbx = new dropbox({accessToken:AccessToken});
 // Callback funtion to write data to a CSV file
 
 var json2csvCallback = function (err,csv) {
     if (err) throw err;
+
+    dbx.filesUpload({path:p+'test.csv',contents:csv})
+      .then(function(response){
+
+      console.log(response)
+      })
+      .catch(function(error){
+        console.log(console.error())
+      });
 
     fs.writeFile('filename', csv, function(err){
       if (err) throw err;
@@ -31,7 +44,7 @@ var options = {
 
 // Connect to mongoDB //
 
-var TMSB_db =  //connection string
+var TMSB_db = 'mongodb://mdb1.trackmanbaseball.com:27000/TMSB?readPreference=primary' //connection string
 mongoose.connect(TMSB_db, function(err){
   if (err) throw err;
   console.log("Connection" + " to "+ TMSB_db + " Sucessful!")
@@ -256,11 +269,11 @@ Play.aggregate(
   ]
 	// Created with 3T MongoChef, the GUI for MongoDB - https://3t.io/mongochef
   ,function(err,doc) {
-    if(err) {return handleError(err);}
+    if(err) {throw err}
     else{
-      //console.log(doc[1]);
+      console.log(doc[1]);
       //converter.json2csv(doc, json2csvCallback,options);
-      CSV(doc,function(doc){converter.json2csv(doc, json2csvCallback,options)});
+      //CSV(doc,function(doc){converter.json2csv(doc, json2csvCallback,options)});
 
     }
   }

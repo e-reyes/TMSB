@@ -1,5 +1,6 @@
 //mongoose Schema for game collection//
 var mongoose = require ('mongoose');
+
 var Schema = mongoose.Schema;
 
 var gameSchema = new Schema ({

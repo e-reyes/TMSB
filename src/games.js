@@ -1,22 +1,18 @@
 // include packages & models //
-var mongoose = require ('mongoose');
 var Game = require('../models/game.js');
 var Play = require('../models/play.js');
-var converter = require('json-2-csv');
-var fs = require('fs');
-var CSV = require('./formatJSON.js');
 var moment = require('moment');
 
 
 // Input Date -> Generate Game CSV //
 
-var options= {start_date:'2017-03-25'};
+
 
 var listGamesByDate = function (options,Callback) {
   var start_date = options.start_date !== undefined ?  moment(options.start_date).utcOffset(7).format("YYYY-MM-DD") : moment().add(-1,'d').utcOffset(7).format("YYYY-MM-DD");
   var end_date = options.end_date !== undefined ?  moment(options.end_date).utcOffset(7).format("YYYY-MM-DD") : moment().add(1,'d').utcOffset(7).format("YYYY-MM-DD");
 
-  var end_date = moment(options.end_date).utcOffset(7).format("YYYY-MM-DD");
+
   console.log(start_date);
   console.log(end_date);
 
@@ -47,17 +43,13 @@ var listGamesByDate = function (options,Callback) {
 		},
 
 	],function(err,doc) {
-    if(err) {return handleError(err);}
+      if(err) {throw err}
 
-    else{
-
-      //console.log(doc);
-      Callback(doc);
-
+      else{
+        Callback(doc);
       }
     }
-  );
-
+  )
 };
 
 
@@ -280,10 +272,10 @@ var getGameData = function (gameID, Callback){
     ]
   	// Created with 3T MongoChef, the GUI for MongoDB - https://3t.io/mongochef
     ,function(err,doc) {
-      if(err) {return handleError(err);}
+      if(err) {throw err}
       else{
 
-        Callback (doc);
+    Callback (doc);
 
 
       }
@@ -295,15 +287,7 @@ var getGameData = function (gameID, Callback){
 
 
 
-
-
-//Unit Test//
-
-var db = 'mongodb://mdb0.trackmanbaseball.com:27000/TMSB';
-mongoose.connect(db, function(err){
-  if (err) throw err;
-  console.log("Connection" + " to "+ db + " Sucessful!")
-});
-
-listGamesByDate(options,console.log)
-getGameData ('4a4e7679-5ab7-4547-89c3-151dea724999', console.log)
+module.exports = {
+  listGamesByDate:listGamesByDate,
+  getGameData:getGameData
+}

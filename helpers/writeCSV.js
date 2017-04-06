@@ -1,6 +1,6 @@
 var fs = require('fs');
 var dropbox = require('dropbox');
-var p = '/NCAA reports/Softball/Arizona/GameData/';
+var p = '/NCAA reports/AZ Softball/GameData/';
 var AccessToken ='LF-3mQtGe3AAAAAAAAAAD8umjtxb8qjv4N64h3_sW3ZuzliimBX49rQAWUS9wztp';
 var dbx = new dropbox({accessToken:AccessToken});
 

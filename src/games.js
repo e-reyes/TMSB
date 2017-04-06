@@ -2,9 +2,8 @@
 var Game = require('../models/game.js');
 var Play = require('../models/play.js');
 var moment = require('moment');
+var db = require('../database/db.js');
 
-
-// Input Date -> Generate Game CSV //
 
 
 
@@ -285,7 +284,7 @@ var getGameData = function (gameID, Callback){
 
 }
 
-
+//listGamesByDate(DateRange,console.log)
 
 module.exports = {
   listGamesByDate:listGamesByDate,
